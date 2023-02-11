@@ -18,28 +18,23 @@ public class IndexController implements Serializable {
 
     }
 
-
-
-    public String CheckLoginState ()
+    public  boolean CheckLoginState ()
     {
-        FacesContext context = FacesContext.getCurrentInstance();
-
-        UserSession userSession = UserSession.getApp();
+        UserSession userSession = UserSession.getSession();
 
         if (userSession.getCurrentUser() == null)
         {
-            return "Login.xhtml";
+            return false;
         }
 
-        context.addMessage(null,new FacesMessage("You are already logged in"));
-        return null;
+        return true;
     }
 
     public String Register ()
     {
         FacesContext context = FacesContext.getCurrentInstance();
 
-        UserSession userSession = UserSession.getApp();
+        UserSession userSession = UserSession.getSession();
 
         if (userSession.getCurrentUser() == null)
         {

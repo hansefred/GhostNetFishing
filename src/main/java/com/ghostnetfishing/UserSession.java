@@ -12,7 +12,7 @@ public class UserSession  implements Serializable {
 
     //Singelton implementation for App
     private static UserSession app;
-    public static UserSession getApp ()
+    public static UserSession getSession ()
     {
         if (app == null)
         {

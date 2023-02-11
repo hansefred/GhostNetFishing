@@ -1,5 +1,6 @@
 package com.ghostnetfishing.Controller;
 
+import com.ghostnetfishing.App;
 import com.ghostnetfishing.Bean.RegisterRequest;
 import com.ghostnetfishing.Bean.Role;
 import com.ghostnetfishing.User.Detector;
@@ -28,7 +29,7 @@ public class RegisterController implements Serializable {
     }
 
     @Inject
-    private UserDAO userDAO;
+    private App app;
 
     private RegisterRequest registerRequest;
     private Role selectedRole;
@@ -47,7 +48,7 @@ public class RegisterController implements Serializable {
 
 
 
-        for (User u : userDAO.GetAll()) {
+        for (User u : app.getUserDAO().GetAll()) {
             if (u.geteMail().equals(registerRequest.geteMail())) {
                 context.addMessage(null,new FacesMessage("User already exists"));
                 return null;
@@ -58,11 +59,11 @@ public class RegisterController implements Serializable {
         {
             case SALVOR:
                 Salvor s = new Salvor (registerRequest.getFirstName(), registerRequest.getLastName(), registerRequest.geteMail(),passwordHash, registerRequest.getPhoneNumber());
-                userDAO.CreateUser(s);
+                app.getUserDAO().CreateUser(s);
                 break;
             case DETECTOR:
                 Detector d = new Detector (registerRequest.getFirstName(), registerRequest.getLastName(), registerRequest.geteMail(),passwordHash, registerRequest.getPhoneNumber());
-                userDAO.CreateUser(d);
+                app.getUserDAO().CreateUser(d);
                 break;
         }
 

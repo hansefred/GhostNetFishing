@@ -18,8 +18,9 @@
 
 <h:body>
     <h:form id="form">
-        <h:commandButton value="Login" action="#{IndexController.CheckLoginState()}" update="form" />
+        <h:commandButton value="Login" action="Login" rendered="#{!IndexController.CheckLoginState()}"  />
         <h:commandButton value="Register" action="#{IndexController.Register()}"  update="form" />
+        <h:commandButton value="Logout" action="Logout" rendered="#{IndexController.CheckLoginState()}"/>
         <h:messages />
     </h:form>
 </h:body>

@@ -49,9 +49,9 @@
             </p:panel>
             <p:panel>
                 <p:outputLabel value="Passwort: " for="pwd" />
-                <p:inputText id="pwd" required="true" value="#{RegisterController.registerRequest.password}" />
+                <p:password id="pwd" required="true" value="#{RegisterController.registerRequest.password}" />
                 <p:outputLabel value="Wiederhole Passwort: " for="rpwd" />
-                <p:inputText id="rpwd" required="true" value="#{RegisterController.registerRequest.repeatPassword}" />
+                <p:password id="rpwd" required="true" value="#{RegisterController.registerRequest.repeatPassword}" />
                 <p:message for="pwd" />
             </p:panel>
             <p:commandButton value="Submit" action="#{RegisterController.Register()}" update="form"/>

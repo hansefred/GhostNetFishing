@@ -1,6 +1,7 @@
 package com.ghostnetfishing.Controller;
 
 
+import com.ghostnetfishing.App;
 import com.ghostnetfishing.Bean.LoginRequest;
 import com.ghostnetfishing.User.User;
 import com.ghostnetfishing.UserDAO;
@@ -29,7 +30,7 @@ public class LoginController implements Serializable {
 
 
     @Inject
-    private UserDAO userDAO;
+    private App app;
 
     private LoginRequest loginRequest;
 
@@ -50,7 +51,7 @@ public class LoginController implements Serializable {
     public String Login ()
     {
         FacesContext context = FacesContext.getCurrentInstance();
-        UserSession userSession = UserSession.getApp();
+        UserSession userSession = UserSession.getSession();
         if (userSession.getCurrentUser() != null) {
             context.addMessage(null,new FacesMessage("You are already logged in"));
             return null;
@@ -59,7 +60,7 @@ public class LoginController implements Serializable {
 
         User foundUser = new User();
         boolean userFound = false;
-        for (User u : userDAO.GetAll()) {
+        for (User u : app.getUserDAO().GetAll()) {
             if (u.geteMail().equals(loginRequest.geteMail())) {
                 userFound = true;
                 foundUser = u;
