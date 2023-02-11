@@ -3,8 +3,10 @@ package com.ghostnetfishing.Bean.DB.UserObj;
 import com.ghostnetfishing.Bean.DB.GhostNet;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Detector extends  User{
@@ -18,7 +20,7 @@ public class Detector extends  User{
         super(firstName, lastName, eMail, passwordHash, phoneNumber);
     }
 
-    @OneToMany
+    @OneToMany (mappedBy = "detector", fetch = FetchType.EAGER)
     List<GhostNet> detectedNets;
 
 

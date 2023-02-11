@@ -5,13 +5,15 @@ import com.ghostnetfishing.Bean.DB.GhostNet;
 
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import java.util.List;
 
 @Entity
 public class Salvor  extends  User{
 
-
+    @OneToMany (mappedBy = "salvor", fetch = FetchType.EAGER)
+    List<GhostNet> salvagedNet;
     public Salvor() {
     }
 
@@ -28,8 +30,7 @@ public class Salvor  extends  User{
         this.salvagedNet = salvagedNet;
     }
 
-    @OneToMany
-    List<GhostNet> salvagedNet;
+
 
 
 }

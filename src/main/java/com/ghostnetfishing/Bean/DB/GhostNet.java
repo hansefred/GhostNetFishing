@@ -1,9 +1,9 @@
 package com.ghostnetfishing.Bean.DB;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.ghostnetfishing.Bean.DB.UserObj.Detector;
+import com.ghostnetfishing.Bean.DB.UserObj.Salvor;
+
+import javax.persistence.*;
 
 import java.util.UUID;
 
@@ -15,6 +15,14 @@ public class GhostNet {
     {
 
     }
+
+    public GhostNet(double latitude, double longitude, int estimatedSizeinspuaremetre) {
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.estimatedSizeinspuaremetre = estimatedSizeinspuaremetre;
+        this.state = GhostNetState.REGISTERED;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID ID;
@@ -23,6 +31,12 @@ public class GhostNet {
     private int estimatedSizeinspuaremetre;
 
     private GhostNetState state;
+
+    @ManyToOne
+    private Detector detector;
+
+    @ManyToOne
+    private Salvor salvor;
 
 
     public UUID getID() {
@@ -62,6 +76,23 @@ public class GhostNet {
 
     public void setState(GhostNetState state) {
         this.state = state;
+    }
+
+
+    public Detector getDetector() {
+        return detector;
+    }
+
+    public void setDetector(Detector detector) {
+        this.detector = detector;
+    }
+
+    public Salvor getSalvor() {
+        return salvor;
+    }
+
+    public void setSalvor(Salvor salvor) {
+        this.salvor = salvor;
     }
 }
 

@@ -18,17 +18,6 @@ public class IndexController implements Serializable {
 
     }
 
-    public  boolean CheckLoginState ()
-    {
-        UserSession userSession = UserSession.getSession();
-
-        if (userSession.getCurrentUser() == null)
-        {
-            return false;
-        }
-
-        return true;
-    }
 
     public String Register ()
     {
