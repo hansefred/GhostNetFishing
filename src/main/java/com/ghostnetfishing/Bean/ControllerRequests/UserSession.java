@@ -1,13 +1,15 @@
-package com.ghostnetfishing;
+package com.ghostnetfishing.Bean.ControllerRequests;
 
 
-import com.ghostnetfishing.User.User;
+
+import com.ghostnetfishing.Bean.DB.UserObj.User;
+
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 import java.io.Serializable;
 
 @SessionScoped
-@Named
+@Named("UserSession")
 public class UserSession  implements Serializable {
 
     //Singelton implementation for App

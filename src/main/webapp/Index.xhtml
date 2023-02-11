@@ -21,6 +21,7 @@
         <h:commandButton value="Login" action="Login" rendered="#{!IndexController.CheckLoginState()}"  />
         <h:commandButton value="Register" action="#{IndexController.Register()}"  update="form" />
         <h:commandButton value="Logout" action="Logout" rendered="#{IndexController.CheckLoginState()}"/>
+        <h:outputText rendered="#{IndexController.CheckLoginState()}" value="Hallo #{UserSession.session.currentUser.firstName} #{UserSession.session.currentUser.lastName}" />
         <h:messages />
     </h:form>
 </h:body>

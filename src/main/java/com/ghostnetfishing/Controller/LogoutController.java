@@ -1,7 +1,7 @@
 package com.ghostnetfishing.Controller;
 
 
-import com.ghostnetfishing.UserSession;
+import com.ghostnetfishing.Bean.ControllerRequests.UserSession;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;

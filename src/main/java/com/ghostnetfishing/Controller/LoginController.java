@@ -1,15 +1,14 @@
 package com.ghostnetfishing.Controller;
 
 
-import com.ghostnetfishing.App;
-import com.ghostnetfishing.Bean.LoginRequest;
-import com.ghostnetfishing.User.User;
-import com.ghostnetfishing.UserDAO;
-import com.ghostnetfishing.UserSession;
+
+import com.ghostnetfishing.Bean.App;
+import com.ghostnetfishing.Bean.ControllerRequests.LoginRequest;
+import com.ghostnetfishing.Bean.ControllerRequests.UserSession;
+import com.ghostnetfishing.Bean.DB.UserObj.User;
 
 
 import javax.enterprise.context.RequestScoped;
-import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 

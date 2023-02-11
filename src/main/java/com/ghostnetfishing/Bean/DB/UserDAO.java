@@ -1,6 +1,8 @@
-package com.ghostnetfishing;
+package com.ghostnetfishing.Bean.DB;
 
-import com.ghostnetfishing.User.User;
+
+
+import com.ghostnetfishing.Bean.DB.UserObj.User;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;

@@ -1,7 +1,8 @@
-package com.ghostnetfishing.User;
+package com.ghostnetfishing.Bean.DB.UserObj;
 
 
-import com.ghostnetfishing.GhostNet;
+import com.ghostnetfishing.Bean.DB.GhostNet;
+
 
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;

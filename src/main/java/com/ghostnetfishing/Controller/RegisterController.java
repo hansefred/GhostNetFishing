@@ -1,15 +1,16 @@
 package com.ghostnetfishing.Controller;
 
-import com.ghostnetfishing.App;
-import com.ghostnetfishing.Bean.RegisterRequest;
-import com.ghostnetfishing.Bean.Role;
-import com.ghostnetfishing.User.Detector;
-import com.ghostnetfishing.User.Salvor;
-import com.ghostnetfishing.User.User;
-import com.ghostnetfishing.UserDAO;
+
+
+import com.ghostnetfishing.Bean.App;
+import com.ghostnetfishing.Bean.ControllerRequests.RegisterRequest;
+import com.ghostnetfishing.Bean.ControllerRequests.Role;
+import com.ghostnetfishing.Bean.DB.UserObj.Detector;
+import com.ghostnetfishing.Bean.DB.UserObj.Salvor;
+import com.ghostnetfishing.Bean.DB.UserObj.User;
+
 
 import javax.enterprise.context.RequestScoped;
-import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
@@ -58,11 +59,11 @@ public class RegisterController implements Serializable {
         switch (selectedRole)
         {
             case SALVOR:
-                Salvor s = new Salvor (registerRequest.getFirstName(), registerRequest.getLastName(), registerRequest.geteMail(),passwordHash, registerRequest.getPhoneNumber());
+                Salvor s = new Salvor(registerRequest.getFirstName(), registerRequest.getLastName(), registerRequest.geteMail(),passwordHash, registerRequest.getPhoneNumber());
                 app.getUserDAO().CreateUser(s);
                 break;
             case DETECTOR:
-                Detector d = new Detector (registerRequest.getFirstName(), registerRequest.getLastName(), registerRequest.geteMail(),passwordHash, registerRequest.getPhoneNumber());
+                Detector d = new Detector(registerRequest.getFirstName(), registerRequest.getLastName(), registerRequest.geteMail(),passwordHash, registerRequest.getPhoneNumber());
                 app.getUserDAO().CreateUser(d);
                 break;
         }

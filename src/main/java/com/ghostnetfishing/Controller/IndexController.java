@@ -1,6 +1,6 @@
 package com.ghostnetfishing.Controller;
 
-import com.ghostnetfishing.UserSession;
+import com.ghostnetfishing.Bean.ControllerRequests.UserSession;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;

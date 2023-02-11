@@ -1,4 +1,4 @@
-package com.ghostnetfishing;
+package com.ghostnetfishing.Bean.DB;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

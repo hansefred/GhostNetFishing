@@ -1,4 +1,4 @@
-package com.ghostnetfishing.User;
+package com.ghostnetfishing.Bean.DB.UserObj;
 
 
 

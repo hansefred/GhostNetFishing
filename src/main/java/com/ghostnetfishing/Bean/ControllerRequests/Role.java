@@ -1,4 +1,4 @@
-package com.ghostnetfishing.Bean;
+package com.ghostnetfishing.Bean.ControllerRequests;
 
 
 public enum Role {

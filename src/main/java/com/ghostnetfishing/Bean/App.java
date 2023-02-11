@@ -1,4 +1,6 @@
-package com.ghostnetfishing;
+package com.ghostnetfishing.Bean;
+
+import com.ghostnetfishing.Bean.DB.UserDAO;
 
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
