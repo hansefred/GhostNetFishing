@@ -13,11 +13,15 @@
       xmlns:h="http://java.sun.com/jsf/html">
 
 <h:head>
-    <title>$Title$</title>
+    <title>Title</title>
 </h:head>
 
 <h:body>
-  $END$
+    <h:form id="form">
+        <h:commandButton value="Login" action="#{IndexController.CheckLoginState()}" update="form" />
+        <h:commandButton value="Register" action="#{IndexController.Register()}"  update="form" />
+        <h:messages />
+    </h:form>
 </h:body>
 
 </html>

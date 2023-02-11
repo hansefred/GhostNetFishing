@@ -1,2 +1,11 @@
-package com.ghostnetfishing;public class GhostNetState {
+package com.ghostnetfishing;
+
+
+public enum GhostNetState {
+
+        REGISTERED,
+        SALVAGE_IMMINENT,
+        SECURE,
+        MISSING
+
 }

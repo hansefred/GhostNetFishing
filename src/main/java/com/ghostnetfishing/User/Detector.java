@@ -7,11 +7,15 @@ import javax.persistence.OneToMany;
 import java.util.List;
 
 @Entity
-public class Detectors extends  User{
+public class Detector extends  User{
 
 
-    public Detectors() {
+    public Detector() {
 
+    }
+
+    public Detector(String firstName, String lastName, String eMail, int passwordHash, String phoneNumber) {
+        super(firstName, lastName, eMail, passwordHash, phoneNumber);
     }
 
     @OneToMany
