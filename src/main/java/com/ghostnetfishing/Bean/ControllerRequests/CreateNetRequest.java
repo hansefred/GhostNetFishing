@@ -1,7 +1,7 @@
 package com.ghostnetfishing.Bean.ControllerRequests;
 
-import com.ghostnetfishing.Bean.DB.UserObj.Detector;
 import com.ghostnetfishing.Bean.DB.UserObj.User;
+
 
 import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
@@ -15,10 +15,8 @@ public class CreateNetRequest {
 
         User u = UserSession.getSession().getCurrentUser();
 
-        if (u instanceof Detector)
-        {
-            this.detector = (Detector) u;
-        }
+        this.detector = u;
+
     }
 
     @DecimalMin(value ="0.0")
@@ -33,7 +31,7 @@ public class CreateNetRequest {
     private int estimatedSizeinm2;
 
 
-    private Detector detector;
+    private User detector;
 
     public double getLatitude() {
         return latitude;
@@ -59,11 +57,11 @@ public class CreateNetRequest {
         this.estimatedSizeinm2 = estimatedSizeinm2;
     }
 
-    public Detector getDetector() {
+    public User getDetector() {
         return detector;
     }
 
-    public void setDetector(Detector detector) {
+    public void setDetector(User detector) {
         this.detector = detector;
     }
 }

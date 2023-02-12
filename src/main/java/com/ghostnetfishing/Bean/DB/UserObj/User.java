@@ -2,17 +2,21 @@ package com.ghostnetfishing.Bean.DB.UserObj;
 
 
 
+import com.ghostnetfishing.Bean.DB.GhostNet;
+
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
 public class User {
 
     @Id
     @GeneratedValue (strategy = GenerationType.AUTO)
-    private UUID id;
+    private int id;
 
     @Column(length = 100)
     private String firstName;
@@ -27,6 +31,10 @@ public class User {
     @Column(length = 100)
     private String phoneNumber;
 
+    @OneToMany(mappedBy = "detector", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<GhostNet> ghostNets = new ArrayList<>();
+
+
     public User (){
 
     }
@@ -39,11 +47,12 @@ public class User {
         this.phoneNumber = phoneNumber;
     }
 
-    public UUID getId() {
+
+    public int getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -84,6 +93,40 @@ public class User {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+
+
+    public List<GhostNet> getGhostNets() {
+        return ghostNets;
+    }
+
+    public void setGhostNets(List<GhostNet> ghostNets) {
+        this.ghostNets = ghostNets;
+    }
+
+    public  void AddNet (GhostNet ghostNet)
+    {
+        this.ghostNets.add(ghostNet);
+        ghostNet.setDetector(this);
+    }
+
+    @Override
+    public boolean equals(Object  obj){
+        if (obj == null) {
+            return false;
+        }
+
+        if (obj.getClass() != this.getClass()) {
+            return false;
+        }
+
+        final User other = (User) obj;
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        return true;
+
     }
 
 

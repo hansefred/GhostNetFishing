@@ -2,7 +2,6 @@ package com.ghostnetfishing.Bean.DB;
 
 
 
-import com.ghostnetfishing.Bean.DB.UserObj.Detector;
 import com.ghostnetfishing.Bean.DB.UserObj.User;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -39,6 +38,18 @@ public class UserDAO {
         entityManager.close();
     }
 
+    public void UpdateUser(User user)
+    {
+        EntityManager entityManager = emf.createEntityManager();
+
+        EntityTransaction t = entityManager.getTransaction();
+        t.begin();
+
+        entityManager.merge(user);
+
+        t.commit();
+        entityManager.close();
+    }
 
 
 

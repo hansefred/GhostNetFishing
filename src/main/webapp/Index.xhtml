@@ -26,6 +26,32 @@
         <h:commandButton value="Netz erstellen" action="CreateNet" />
         <h:messages />
     </h:form>
+
+    <div class="card">
+        <h:form id="dataform">
+            <p:dataTable id="products" var="product" value="#{IndexController.ghostNets}" >
+                <f:facet name="header">
+                    RightClick to View Options
+                </f:facet>
+
+                <p:column headerText="Breitengrad">
+                    <h:outputText value="#{product.latitude}"/>
+                </p:column>
+                <p:column headerText="Längengrad">
+                    <h:outputText value="#{product.longitude}" />
+                </p:column>
+                <p:column headerText="Geschätzte Größe in Quadratmeter" />
+                    <h:outputText value="#{product.estimatedSizeinspuaremetre}" />
+                <p:column headerText="E-Mail gemeldete Person">
+                    <h:outputText value="#{product.detector.eMail}" />
+                </p:column>
+                <p:column>
+                    <h:commandButton value="Akzeptiere Bergung" action="#{IndexController.AcceptSalvage(product)}" />
+                </p:column>
+            </p:dataTable>
+        </h:form>
+    </div>
+
 </h:body>
 
 </html>

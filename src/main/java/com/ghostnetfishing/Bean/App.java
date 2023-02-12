@@ -3,20 +3,32 @@ package com.ghostnetfishing.Bean;
 import com.ghostnetfishing.Bean.DB.GhostNetDAO;
 import com.ghostnetfishing.Bean.DB.UserDAO;
 
-import javax.ejb.Singleton;
-import javax.ejb.Startup;
+
+import javax.enterprise.context.ApplicationScoped;
 
 
-
-@Startup
-@Singleton
+@ApplicationScoped
 public class App {
     private UserDAO userDAO;
     private GhostNetDAO ghostNetDAO;
 
+
+
+    private static App app;
+
+
+    public static App getApp ()
+    {
+        if (app == null){
+            app = new App();
+        }
+        return app;
+    }
+
     public App() {
         userDAO = new UserDAO();
         ghostNetDAO = new GhostNetDAO();
+
     }
 
     public UserDAO getUserDAO() {
@@ -26,4 +38,6 @@ public class App {
     public GhostNetDAO getGhostNetDAO() {
         return ghostNetDAO;
     }
+
+
 }

@@ -1,14 +1,14 @@
 package com.ghostnetfishing.Bean.DB;
 
-import com.ghostnetfishing.Bean.DB.UserObj.Detector;
-import com.ghostnetfishing.Bean.DB.UserObj.Salvor;
+import com.ghostnetfishing.Bean.DB.UserObj.User;
 
 import javax.persistence.*;
 
+import java.util.Objects;
 import java.util.UUID;
 
 
-@Entity
+@Entity (name = "GhostNet")
 public class GhostNet {
 
     public  GhostNet ()
@@ -25,27 +25,45 @@ public class GhostNet {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID ID;
+    private int ID;
     private double latitude;
     private double longitude;
     private int estimatedSizeinspuaremetre;
 
     private GhostNetState state;
 
+
+
     @ManyToOne
-    private Detector detector;
-
-    @ManyToOne
-    private Salvor salvor;
+    private User detector;
 
 
-    public UUID getID() {
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        GhostNet net = (GhostNet) o;
+        return Objects.equals(net.ID, this.ID);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.ID);
+    }
+
+
+    public int getID() {
         return ID;
     }
 
-    public void setID(UUID ID) {
+    public void setID(int ID) {
         this.ID = ID;
     }
+
     public double getLatitude() {
         return latitude;
     }
@@ -78,21 +96,12 @@ public class GhostNet {
         this.state = state;
     }
 
-
-    public Detector getDetector() {
+    public User getDetector() {
         return detector;
     }
 
-    public void setDetector(Detector detector) {
+    public void setDetector(User detector) {
         this.detector = detector;
-    }
-
-    public Salvor getSalvor() {
-        return salvor;
-    }
-
-    public void setSalvor(Salvor salvor) {
-        this.salvor = salvor;
     }
 }
 

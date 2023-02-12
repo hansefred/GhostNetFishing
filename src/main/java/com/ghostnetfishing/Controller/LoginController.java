@@ -13,13 +13,13 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
 
-import javax.inject.Inject;
 import javax.inject.Named;
 
 
 
 
 import java.io.Serializable;
+import java.util.List;
 
 @Named("LoginController")
 @RequestScoped
@@ -28,8 +28,7 @@ public class LoginController implements Serializable {
 
 
 
-    @Inject
-    private App app;
+
 
     private LoginRequest loginRequest;
 
@@ -44,7 +43,10 @@ public class LoginController implements Serializable {
 
     public  LoginController ()
     {
+
         loginRequest = new LoginRequest();
+
+        List<User> detectorList =  App.getApp().getUserDAO().GetAll();
     }
 
     public String Login ()
@@ -59,7 +61,7 @@ public class LoginController implements Serializable {
 
         User foundUser = new User();
         boolean userFound = false;
-        for (User u : app.getUserDAO().GetAll()) {
+        for (User u : App.getApp().getUserDAO().GetAll()) {
             if (u.geteMail().equals(loginRequest.geteMail())) {
                 userFound = true;
                 foundUser = u;

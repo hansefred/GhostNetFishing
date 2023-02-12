@@ -1,12 +1,9 @@
 package com.ghostnetfishing.Bean.DB;
 
 
-import com.ghostnetfishing.Bean.App;
-import com.ghostnetfishing.Bean.DB.UserObj.Detector;
 import com.ghostnetfishing.Bean.DB.UserObj.User;
 
 import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.*;
 import java.util.List;
@@ -16,9 +13,6 @@ import java.util.List;
 public class GhostNetDAO {
 
     private final  static EntityManagerFactory emf = Persistence.createEntityManagerFactory("Default");
-
-    @Inject
-    App app;
 
     public List<GhostNet> GetAll ()
     {
@@ -37,17 +31,24 @@ public class GhostNetDAO {
         EntityTransaction t = entityManager.getTransaction();
         t.begin();
 
+
         entityManager.persist(ghostNet);
 
 
-        Detector d = ghostNet.getDetector();
-        d.getDetectedNets().add(ghostNet);
+
+        t.commit();
+        entityManager.close();
+    }
 
 
+    public void UpdateNet(GhostNet net)
+    {
+        EntityManager entityManager = emf.createEntityManager();
 
+        EntityTransaction t = entityManager.getTransaction();
+        t.begin();
 
-
-
+        entityManager.merge(net);
 
         t.commit();
         entityManager.close();

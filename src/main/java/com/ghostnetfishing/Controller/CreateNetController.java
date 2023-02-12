@@ -3,20 +3,24 @@ package com.ghostnetfishing.Controller;
 import com.ghostnetfishing.Bean.App;
 import com.ghostnetfishing.Bean.ControllerRequests.CreateNetRequest;
 import com.ghostnetfishing.Bean.DB.GhostNet;
+import com.ghostnetfishing.Bean.DB.GhostNetDAO;
+import com.ghostnetfishing.Bean.DB.UserDAO;
+import com.ghostnetfishing.Bean.DB.UserObj.User;
 
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import javax.inject.Inject;
 import javax.inject.Named;
+import javax.persistence.*;
+import javax.transaction.Transaction;
+import java.util.List;
 
 
 @Named("CreateNetController")
 @RequestScoped
 public class CreateNetController {
 
-    @Inject
-    private App app;
+
     private CreateNetRequest createNetRequest;
 
     public CreateNetController() {
@@ -34,6 +38,7 @@ public class CreateNetController {
     }
 
 
+    private final  static EntityManagerFactory emf = Persistence.createEntityManagerFactory("Default");
     public String CreateNet () {
         FacesContext context = FacesContext.getCurrentInstance();
         if (context.isValidationFailed()) {
@@ -48,11 +53,18 @@ public class CreateNetController {
         }
 
 
+
+        UserDAO userDAO = App.getApp().getUserDAO();
+        GhostNetDAO ghostNetDAO = App.getApp().getGhostNetDAO();
+
+
         GhostNet ghostNet = new GhostNet(createNetRequest.getLatitude(), createNetRequest.getLongitude(), createNetRequest.getEstimatedSizeinm2());
+        ghostNetDAO.CreateNet(ghostNet);
 
-        ghostNet.setDetector(createNetRequest.getDetector());
-        app.getGhostNetDAO().CreateNet(ghostNet);
-
+        User d = createNetRequest.getDetector();
+        d.AddNet(ghostNet);
+        userDAO.UpdateUser(d);
+        ghostNetDAO.UpdateNet(ghostNet);
 
         return "Index.xhtml";
     }
