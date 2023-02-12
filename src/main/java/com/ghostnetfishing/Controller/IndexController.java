@@ -24,6 +24,7 @@ public class IndexController implements Serializable {
     public IndexController ()
     {
         ghostNets = App.getApp().getGhostNetDAO().GetAll();
+
     }
 
     private List<GhostNet> ghostNets;
@@ -31,12 +32,14 @@ public class IndexController implements Serializable {
     private GhostNet selectedNet;
 
 
+    @Inject
+    private UserSession userSession;
+
 
     public String Register ()
     {
         FacesContext context = FacesContext.getCurrentInstance();
 
-        UserSession userSession = UserSession.getSession();
 
         if (userSession.getCurrentUser() == null)
         {
@@ -68,5 +71,13 @@ public class IndexController implements Serializable {
 
     public void setSelectedNet(GhostNet selectedNet) {
         this.selectedNet = selectedNet;
+    }
+
+    public UserSession getUserSession() {
+        return userSession;
+    }
+
+    public void setUserSession(UserSession userSession) {
+        this.userSession = userSession;
     }
 }

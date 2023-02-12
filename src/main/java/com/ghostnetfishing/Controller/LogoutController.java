@@ -4,6 +4,7 @@ package com.ghostnetfishing.Controller;
 import com.ghostnetfishing.Bean.ControllerRequests.UserSession;
 
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 
@@ -11,12 +12,12 @@ import javax.inject.Named;
 @RequestScoped
 public class LogoutController {
 
-
+    @Inject
+    UserSession userSession;
 
 
     public String Logout ()
     {
-        UserSession userSession = UserSession.getSession();
         userSession.setCurrentUser(null);
 
         return "Index.xhtml";

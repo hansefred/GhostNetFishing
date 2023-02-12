@@ -37,6 +37,8 @@ public class GhostNet {
     @ManyToOne
     private User detector;
 
+    @ManyToOne
+    private User salvor;
 
     @Override
     public boolean equals(Object o) {

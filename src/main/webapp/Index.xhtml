@@ -22,18 +22,14 @@
     <h:form id="form">
         <h:commandButton value="Login" action="Login"   />
         <h:commandButton value="Register" action="#{IndexController.Register()}"  update="form" />
-        <h:commandButton value="Logout" action="Logout" />
-        <h:commandButton value="Netz erstellen" action="CreateNet" />
+        <h:commandButton value="Logout" action="Logout" rendered="#{IndexController.userSession.loggedIn}" />
+        <h:commandButton value="Netz erstellen" action="CreateNet" rendered="#{IndexController.userSession.detector}" />
         <h:messages />
     </h:form>
 
     <div class="card">
         <h:form id="dataform">
             <p:dataTable id="products" var="product" value="#{IndexController.ghostNets}" >
-                <f:facet name="header">
-                    RightClick to View Options
-                </f:facet>
-
                 <p:column headerText="Breitengrad">
                     <h:outputText value="#{product.latitude}"/>
                 </p:column>
@@ -46,7 +42,7 @@
                     <h:outputText value="#{product.detector.eMail}" />
                 </p:column>
                 <p:column>
-                    <h:commandButton value="Akzeptiere Bergung" action="#{IndexController.AcceptSalvage(product)}" />
+                    <h:commandButton rendered="#{IndexController.userSession.salvor}" value="Akzeptiere Bergung" action="#{IndexController.AcceptSalvage(product)}" />
                 </p:column>
             </p:dataTable>
         </h:form>

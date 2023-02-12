@@ -31,8 +31,7 @@ public class User {
     @Column(length = 100)
     private String phoneNumber;
 
-    @OneToMany(mappedBy = "detector", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<GhostNet> ghostNets = new ArrayList<>();
+
 
 
     public User (){
@@ -46,6 +45,9 @@ public class User {
         this.passwordHash = passwordHash;
         this.phoneNumber = phoneNumber;
     }
+
+
+
 
 
     public int getId() {
@@ -97,19 +99,7 @@ public class User {
 
 
 
-    public List<GhostNet> getGhostNets() {
-        return ghostNets;
-    }
 
-    public void setGhostNets(List<GhostNet> ghostNets) {
-        this.ghostNets = ghostNets;
-    }
-
-    public  void AddNet (GhostNet ghostNet)
-    {
-        this.ghostNets.add(ghostNet);
-        ghostNet.setDetector(this);
-    }
 
     @Override
     public boolean equals(Object  obj){

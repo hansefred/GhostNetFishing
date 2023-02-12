@@ -2,6 +2,8 @@ package com.ghostnetfishing.Bean.ControllerRequests;
 
 
 
+import com.ghostnetfishing.Bean.DB.UserObj.Detector;
+import com.ghostnetfishing.Bean.DB.UserObj.Salvor;
 import com.ghostnetfishing.Bean.DB.UserObj.User;
 
 import javax.enterprise.context.SessionScoped;
@@ -12,17 +14,40 @@ import java.io.Serializable;
 @Named("UserSession")
 public class UserSession  implements Serializable {
 
-    //Singelton implementation for App
-    private static UserSession app;
-    public static UserSession getSession ()
+    public boolean isLoggedIn ()
     {
-        if (app == null)
+        if (currentUser != null)
         {
-            app = new UserSession();
-            return app;
+            return true;
         }
-        return app;
+        return false;
     }
+
+    public  boolean isSalvor ()
+    {
+        if (!isLoggedIn())
+        {
+            return false;
+        }
+        if (currentUser instanceof Salvor)
+        {
+            return true;
+        }
+        return false;
+    }
+    public  boolean isDetector()
+    {
+        if (!isLoggedIn())
+        {
+            return false;
+        }
+        if (currentUser instanceof Detector)
+        {
+            return true;
+        }
+        return false;
+    }
+
 
     public User getCurrentUser() {
         return currentUser;

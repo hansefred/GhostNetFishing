@@ -5,6 +5,7 @@ import com.ghostnetfishing.Bean.ControllerRequests.CreateNetRequest;
 import com.ghostnetfishing.Bean.DB.GhostNet;
 import com.ghostnetfishing.Bean.DB.GhostNetDAO;
 import com.ghostnetfishing.Bean.DB.UserDAO;
+import com.ghostnetfishing.Bean.DB.UserObj.Detector;
 import com.ghostnetfishing.Bean.DB.UserObj.User;
 
 import javax.enterprise.context.RequestScoped;
@@ -61,7 +62,7 @@ public class CreateNetController {
         GhostNet ghostNet = new GhostNet(createNetRequest.getLatitude(), createNetRequest.getLongitude(), createNetRequest.getEstimatedSizeinm2());
         ghostNetDAO.CreateNet(ghostNet);
 
-        User d = createNetRequest.getDetector();
+        Detector d = createNetRequest.getDetector();
         d.AddNet(ghostNet);
         userDAO.UpdateUser(d);
         ghostNetDAO.UpdateNet(ghostNet);

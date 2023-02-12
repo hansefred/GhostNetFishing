@@ -5,6 +5,8 @@ package com.ghostnetfishing.Controller;
 import com.ghostnetfishing.Bean.App;
 import com.ghostnetfishing.Bean.ControllerRequests.RegisterRequest;
 import com.ghostnetfishing.Bean.ControllerRequests.Role;
+import com.ghostnetfishing.Bean.DB.UserObj.Detector;
+import com.ghostnetfishing.Bean.DB.UserObj.Salvor;
 import com.ghostnetfishing.Bean.DB.UserObj.User;
 
 
@@ -55,11 +57,11 @@ public class RegisterController implements Serializable {
         switch (selectedRole)
         {
             case SALVOR:
-                User s = new User(registerRequest.getFirstName(), registerRequest.getLastName(), registerRequest.geteMail(),passwordHash, registerRequest.getPhoneNumber());
+                Salvor s = new Salvor(registerRequest.getFirstName(), registerRequest.getLastName(), registerRequest.geteMail(),passwordHash, registerRequest.getPhoneNumber());
                 App.getApp().getUserDAO().CreateUser(s);
                 break;
             case DETECTOR:
-                User d = new User(registerRequest.getFirstName(), registerRequest.getLastName(), registerRequest.geteMail(),passwordHash, registerRequest.getPhoneNumber());
+                User d = new Detector(registerRequest.getFirstName(), registerRequest.getLastName(), registerRequest.geteMail(),passwordHash, registerRequest.getPhoneNumber());
                 App.getApp().getUserDAO().CreateUser(d);
                 break;
         }

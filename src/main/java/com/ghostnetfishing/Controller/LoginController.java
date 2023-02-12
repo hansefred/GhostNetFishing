@@ -13,6 +13,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
 
+import javax.inject.Inject;
 import javax.inject.Named;
 
 
@@ -27,7 +28,8 @@ import java.util.List;
 public class LoginController implements Serializable {
 
 
-
+    @Inject
+    UserSession userSession;
 
 
     private LoginRequest loginRequest;
@@ -52,7 +54,7 @@ public class LoginController implements Serializable {
     public String Login ()
     {
         FacesContext context = FacesContext.getCurrentInstance();
-        UserSession userSession = UserSession.getSession();
+
         if (userSession.getCurrentUser() != null) {
             context.addMessage(null,new FacesMessage("You are already logged in"));
             return null;
