@@ -19,7 +19,7 @@
 </h:head>
 
 <h:body>
-    <h:form>
+    <h:form rendered="#{CreateNetController.userSession.detector}">
         <p:panel header="Standort">
             <p:outputLabel for="lat" value="Breitengrad" />
             <p:inputNumber required="true" id="lat" value="#{CreateNetController.createNetRequest.latitude}" />

@@ -14,6 +14,10 @@ import java.io.Serializable;
 @Named("UserSession")
 public class UserSession  implements Serializable {
 
+    public UserSession() {
+    }
+    private User currentUser;
+
     public boolean isLoggedIn ()
     {
         if (currentUser != null)
@@ -57,6 +61,6 @@ public class UserSession  implements Serializable {
         this.currentUser = currentUser;
     }
 
-    private User currentUser;
+
 
 }

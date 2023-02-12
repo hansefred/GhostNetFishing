@@ -28,24 +28,38 @@
     </h:form>
 
     <div class="card">
-        <h:form id="dataform">
+        <h:form id="dataform" rendered="#{IndexController.userSession.salvor}">
             <p:dataTable id="products" var="product" value="#{IndexController.ghostNets}" >
                 <p:column headerText="Breitengrad">
-                    <h:outputText value="#{product.latitude}"/>
+                    <h:outputText value="#{product.latitude}°"/>
                 </p:column>
                 <p:column headerText="Längengrad">
-                    <h:outputText value="#{product.longitude}" />
+                    <h:outputText value="#{product.longitude}°" />
                 </p:column>
-                <p:column headerText="Geschätzte Größe in Quadratmeter" />
-                    <h:outputText value="#{product.estimatedSizeinspuaremetre}" />
-                <p:column headerText="E-Mail gemeldete Person">
+                <p:column headerText="Gemeldete Person">
                     <h:outputText value="#{product.detector.eMail}" />
                 </p:column>
+                <p:column headerText="Bergende Person">
+                    <p:link value="#{product.salvor.eMail}" outcome="UserDetails">
+                        <f:param name="netID" value="#{product.salvor.id}"/>
+                    </p:link>
+                </p:column>
+                <p:column headerText="Status">
+                    <h:outputText value="#{product.state.label}"/>
+                </p:column>
+                <p:column headerText="Geschätzte Größe" >
+                    <h:outputText value="#{product.estimatedSizeinspuaremetre} m²" />
+                </p:column>
                 <p:column>
-                    <h:commandButton rendered="#{IndexController.userSession.salvor}" value="Akzeptiere Bergung" action="#{IndexController.AcceptSalvage(product)}" />
+                    <h:commandButton value="Akzeptiere Bergung" action="#{IndexController.AcceptSalvage(product)}" update="dataform" rendered="#{product.salvor == null and product.state == 'REGISTERED'}"/>
+                    <h:commandButton rendered="#{IndexController.userSession.currentUser.equals(product.salvor) and product.state == 'SALVAGE_IMMINENT'}"  value="Als geborgen melden" action="#{IndexController.FinishSalvage(product)}" update="dataform" />
+                    <h:commandButton rendered="#{IndexController.userSession.currentUser.equals(product.salvor) and product.state == 'SALVAGE_IMMINENT'}" value="Als verschollen melden" action="#{IndexController.MissingSalvage(product)}" update="dataform" />
                 </p:column>
             </p:dataTable>
         </h:form>
+        <p:divider rendered="#{!IndexController.userSession.salvor}">
+            <p> Bitte als Bergende Person einloggen um alle offenen Netze zu sehen </p>
+        </p:divider>
     </div>
 
 </h:body>

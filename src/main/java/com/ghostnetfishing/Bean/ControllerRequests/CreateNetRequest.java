@@ -12,20 +12,10 @@ import javax.validation.constraints.Min;
 
 public class CreateNetRequest {
 
-    @Inject
-    private UserSession userSession;
-
-    public CreateNetRequest() {
-
-        User u = userSession.getCurrentUser();
-        if (u instanceof  Detector)
-        {
-            this.detector = (Detector) u;
-        }
 
 
-
-
+    public CreateNetRequest(Detector detector) {
+        this.detector = detector;
     }
 
     @DecimalMin(value ="0.0")

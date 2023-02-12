@@ -3,11 +3,16 @@ package com.ghostnetfishing.Controller;
 import com.ghostnetfishing.Bean.App;
 import com.ghostnetfishing.Bean.ControllerRequests.UserSession;
 import com.ghostnetfishing.Bean.DB.GhostNet;
+import com.ghostnetfishing.Bean.DB.GhostNetDAO;
+import com.ghostnetfishing.Bean.DB.GhostNetState;
+import com.ghostnetfishing.Bean.DB.UserDAO;
+import com.ghostnetfishing.Bean.DB.UserObj.Salvor;
 
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -23,16 +28,24 @@ public class IndexController implements Serializable {
 
     public IndexController ()
     {
+    }
+
+    @Inject
+    public IndexController(UserSession userSession) {
+        this.userSession = userSession;
         ghostNets = App.getApp().getGhostNetDAO().GetAll();
 
     }
+
+
+
 
     private List<GhostNet> ghostNets;
 
     private GhostNet selectedNet;
 
 
-    @Inject
+
     private UserSession userSession;
 
 
@@ -50,8 +63,31 @@ public class IndexController implements Serializable {
         return null;
     }
 
-    public  void AcceptSalvage(GhostNet net)
+    public void AcceptSalvage(GhostNet net)
     {
+        UserDAO userDAO = App.getApp().getUserDAO();
+        GhostNetDAO ghostNetDAO = App.getApp().getGhostNetDAO();
+
+        Salvor s = (Salvor) userSession.getCurrentUser();
+        s.AddNet(net);
+        net.setState(GhostNetState.SALVAGE_IMMINENT);
+        userDAO.UpdateUser(s);
+        ghostNetDAO.UpdateNet(net);
+
+    }
+
+    public void FinishSalvage(GhostNet net)
+    {
+        GhostNetDAO ghostNetDAO = App.getApp().getGhostNetDAO();
+        net.setState(GhostNetState.SECURE);
+        ghostNetDAO.UpdateNet(net);
+
+    }
+    public void MissingSalvage(GhostNet net)
+    {
+        GhostNetDAO ghostNetDAO = App.getApp().getGhostNetDAO();
+        net.setState(GhostNetState.MISSING);
+        ghostNetDAO.UpdateNet(net);
 
     }
 

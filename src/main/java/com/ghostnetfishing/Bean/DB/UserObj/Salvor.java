@@ -27,7 +27,7 @@ public class Salvor  extends User{
     public  void AddNet (GhostNet ghostNet)
     {
         this.acceptedGhostNets.add(ghostNet);
-        ghostNet.setDetector(this);
+        ghostNet.setSalvor(this);
     }
 
 

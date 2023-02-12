@@ -51,6 +51,14 @@ public class UserDAO {
         entityManager.close();
     }
 
+    public User FindByID (int id)
+    {
+        EntityManager entityManager = emf.createEntityManager();
+        User u = entityManager.find(User.class,id);
+        entityManager.close();
+        return u;
+    }
+
 
 
 

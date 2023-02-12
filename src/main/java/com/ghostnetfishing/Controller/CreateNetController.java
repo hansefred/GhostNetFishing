@@ -2,6 +2,7 @@ package com.ghostnetfishing.Controller;
 
 import com.ghostnetfishing.Bean.App;
 import com.ghostnetfishing.Bean.ControllerRequests.CreateNetRequest;
+import com.ghostnetfishing.Bean.ControllerRequests.UserSession;
 import com.ghostnetfishing.Bean.DB.GhostNet;
 import com.ghostnetfishing.Bean.DB.GhostNetDAO;
 import com.ghostnetfishing.Bean.DB.UserDAO;
@@ -11,6 +12,7 @@ import com.ghostnetfishing.Bean.DB.UserObj.User;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.*;
 import javax.transaction.Transaction;
@@ -22,11 +24,20 @@ import java.util.List;
 public class CreateNetController {
 
 
+
     private CreateNetRequest createNetRequest;
+
+    private UserSession userSession;
+
+    @Inject
+    public CreateNetController(UserSession userSession) {
+        this.userSession = userSession;
+        this.createNetRequest = new CreateNetRequest((Detector) userSession.getCurrentUser());
+    }
+
 
     public CreateNetController() {
 
-        createNetRequest = new CreateNetRequest();
     }
 
 
@@ -39,7 +50,7 @@ public class CreateNetController {
     }
 
 
-    private final  static EntityManagerFactory emf = Persistence.createEntityManagerFactory("Default");
+
     public String CreateNet () {
         FacesContext context = FacesContext.getCurrentInstance();
         if (context.isValidationFailed()) {
@@ -71,5 +82,11 @@ public class CreateNetController {
     }
 
 
+    public UserSession getUserSession() {
+        return userSession;
+    }
 
+    public void setUserSession(UserSession userSession) {
+        this.userSession = userSession;
+    }
 }

@@ -1,5 +1,7 @@
 package com.ghostnetfishing.Bean.DB;
 
+import com.ghostnetfishing.Bean.DB.UserObj.Detector;
+import com.ghostnetfishing.Bean.DB.UserObj.Salvor;
 import com.ghostnetfishing.Bean.DB.UserObj.User;
 
 import javax.persistence.*;
@@ -35,10 +37,10 @@ public class GhostNet {
 
 
     @ManyToOne
-    private User detector;
+    private Detector detector;
 
     @ManyToOne
-    private User salvor;
+    private Salvor salvor;
 
     @Override
     public boolean equals(Object o) {
@@ -55,6 +57,17 @@ public class GhostNet {
     @Override
     public int hashCode() {
         return Objects.hash(this.ID);
+    }
+
+
+    public  boolean isSALVAGE_IMMINENT ()
+    {
+        if (state == GhostNetState.SALVAGE_IMMINENT)
+        {
+            return true;
+        }
+
+        return false;
     }
 
 
@@ -98,13 +111,24 @@ public class GhostNet {
         this.state = state;
     }
 
-    public User getDetector() {
+    public Detector getDetector() {
         return detector;
     }
 
-    public void setDetector(User detector) {
+    public void setDetector(Detector detector) {
         this.detector = detector;
     }
+
+
+    public Salvor getSalvor() {
+        return salvor;
+    }
+
+    public void setSalvor(Salvor salvor) {
+        this.salvor = salvor;
+    }
+
+
 }
 
 
