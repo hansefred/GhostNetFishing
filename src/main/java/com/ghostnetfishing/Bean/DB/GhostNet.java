@@ -60,7 +60,7 @@ public class GhostNet {
     }
 
 
-    public  boolean isSALVAGE_IMMINENT ()
+    /*public  boolean isSALVAGE_IMMINENT ()
     {
         if (state == GhostNetState.SALVAGE_IMMINENT)
         {
@@ -68,6 +68,11 @@ public class GhostNet {
         }
 
         return false;
+    }*/
+
+    public String getMapsURL ()
+    {
+        return "https://www.google.com/maps/search/?api=1&query=" + latitude + ","+ longitude;
     }
 
 
@@ -127,6 +132,7 @@ public class GhostNet {
     public void setSalvor(Salvor salvor) {
         this.salvor = salvor;
     }
+
 
 
 }

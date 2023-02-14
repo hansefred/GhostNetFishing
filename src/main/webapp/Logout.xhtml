@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
   Created by IntelliJ IDEA.
-  User: hanse
+  User: Mark Linder
   Date: 11.02.2023
   Time: 11:22
 -->
@@ -20,9 +20,10 @@
 
 <h:body>
     <h:form id="form">
-        <p>Wollen Sie sich wirklich ausloggen ?</p>
-        <h:commandButton value="Zurück" action="Index" />
-        <h:commandButton styleClass="ui-button-danger" value="Logout" action="#{LogoutController.Logout()}" update="form" />
+        <h:outputText value="Wollen Sie sich wirklich ausloggen ?"/>
+        <p/>
+        <p:commandButton value="Zurück" action="Index" />
+        <p:commandButton styleClass="ui-button-danger" value="Logout" action="#{LogoutController.Logout()}" update="form" />
     </h:form>
 </h:body>
 

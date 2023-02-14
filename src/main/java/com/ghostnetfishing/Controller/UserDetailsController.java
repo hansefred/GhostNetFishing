@@ -3,6 +3,8 @@ package com.ghostnetfishing.Controller;
 
 import com.ghostnetfishing.Bean.App;
 import com.ghostnetfishing.Bean.DB.UserDAO;
+import com.ghostnetfishing.Bean.DB.UserObj.Detector;
+import com.ghostnetfishing.Bean.DB.UserObj.Salvor;
 import com.ghostnetfishing.Bean.DB.UserObj.User;
 
 import javax.enterprise.context.RequestScoped;
@@ -15,26 +17,38 @@ import javax.inject.Named;
 public class UserDetailsController {
 
 
-    private String netID;
+    private String userID;
     private User user;
 
+    private Salvor salvor;
+
+    private Detector detector;
 
     private void LoadUser() {
 
         UserDAO userDAO = App.getApp().getUserDAO();
-        int id = Integer.parseInt(netID);
+        int id = Integer.parseInt(userID);
         User u = userDAO.FindByID(id);
         this.user = u;
 
+        if (u instanceof Salvor)
+        {
+            salvor = (Salvor)u;
+        }
 
+        if (u instanceof Detector)
+        {
+            detector = (Detector)u;
+        }
     }
 
-    public String getNetID() {
-        return netID;
+
+    public String getUserID() {
+        return userID;
     }
 
-    public void setNetID(String netID) {
-        this.netID = netID;
+    public void setUserID(String netID) {
+        this.userID = netID;
         LoadUser();
     }
 
@@ -44,5 +58,21 @@ public class UserDetailsController {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Salvor getSalvor() {
+        return salvor;
+    }
+
+    public void setSalvor(Salvor salvor) {
+        this.salvor = salvor;
+    }
+
+    public Detector getDetector() {
+        return detector;
+    }
+
+    public void setDetector(Detector detector) {
+        this.detector = detector;
     }
 }

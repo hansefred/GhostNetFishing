@@ -7,6 +7,7 @@ import com.ghostnetfishing.Bean.DB.UserObj.Salvor;
 import com.ghostnetfishing.Bean.DB.UserObj.User;
 
 import javax.enterprise.context.SessionScoped;
+import javax.enterprise.inject.spi.CDI;
 import javax.inject.Named;
 import java.io.Serializable;
 
@@ -15,6 +16,7 @@ import java.io.Serializable;
 public class UserSession  implements Serializable {
 
     public UserSession() {
+        currentUser = null;
     }
     private User currentUser;
 
@@ -52,7 +54,6 @@ public class UserSession  implements Serializable {
         return false;
     }
 
-
     public User getCurrentUser() {
         return currentUser;
     }
@@ -60,7 +61,4 @@ public class UserSession  implements Serializable {
     public void setCurrentUser(User currentUser) {
         this.currentUser = currentUser;
     }
-
-
-
 }

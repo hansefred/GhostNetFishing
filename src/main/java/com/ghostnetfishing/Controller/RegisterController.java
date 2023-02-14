@@ -5,6 +5,7 @@ package com.ghostnetfishing.Controller;
 import com.ghostnetfishing.Bean.App;
 import com.ghostnetfishing.Bean.ControllerRequests.RegisterRequest;
 import com.ghostnetfishing.Bean.ControllerRequests.Role;
+import com.ghostnetfishing.Bean.ControllerRequests.UserSession;
 import com.ghostnetfishing.Bean.DB.UserObj.Detector;
 import com.ghostnetfishing.Bean.DB.UserObj.Salvor;
 import com.ghostnetfishing.Bean.DB.UserObj.User;
@@ -13,6 +14,7 @@ import com.ghostnetfishing.Bean.DB.UserObj.User;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
 
@@ -28,7 +30,8 @@ public class RegisterController implements Serializable {
         selectedRole = Role.DETECTOR;
     }
 
-
+    @Inject
+    UserSession userSession;
 
     private RegisterRequest registerRequest;
     private Role selectedRole;
@@ -59,15 +62,17 @@ public class RegisterController implements Serializable {
             case SALVOR:
                 Salvor s = new Salvor(registerRequest.getFirstName(), registerRequest.getLastName(), registerRequest.geteMail(),passwordHash, registerRequest.getPhoneNumber());
                 App.getApp().getUserDAO().CreateUser(s);
+                userSession.setCurrentUser(s);
                 break;
             case DETECTOR:
                 User d = new Detector(registerRequest.getFirstName(), registerRequest.getLastName(), registerRequest.geteMail(),passwordHash, registerRequest.getPhoneNumber());
                 App.getApp().getUserDAO().CreateUser(d);
+                userSession.setCurrentUser(d);
                 break;
         }
 
 
-        return "Index.xhtml";
+        return "Index.xhtml?faces-redirect=true";
     }
 
 

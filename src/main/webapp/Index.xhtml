@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
   Created by IntelliJ IDEA.
-  User: hanse
+  User: Mark Linder
   Date: 08.02.2023
   Time: 22:48
 -->
@@ -19,29 +19,34 @@
 </h:head>
 
 <h:body>
-    <h:form id="form">
-        <h:commandButton value="Login" action="Login"   />
-        <h:commandButton value="Register" action="#{IndexController.Register()}"  update="form" />
-        <h:commandButton value="Logout" action="Logout" rendered="#{IndexController.userSession.loggedIn}" />
-        <h:commandButton value="Netz erstellen" action="CreateNet" rendered="#{IndexController.userSession.detector}" />
-        <h:messages />
-    </h:form>
+    <div class="card">
+        <h:form>
+            <p:menubar>
+                <p:menuitem value="Login" action="Login" rendered="#{!IndexController.userSession.loggedIn}" />/>
+                <p:menuitem value="Register" action="Register" rendered="#{!IndexController.userSession.loggedIn}" />/>
+                <p:menuitem value="Logout" action="Logout" rendered="#{IndexController.userSession.loggedIn}" />
+                <p:menuitem value="Netz erstellen" action="CreateNet" rendered="#{IndexController.userSession.loggedIn}"  />
+                <p:menuitem value="Eigenes Konto" action="#{IndexController.NavigateUserDetails()}" rendered="#{IndexController.userSession.loggedIn}" />
+            </p:menubar>
+        </h:form>
+    </div>
+
 
     <div class="card">
         <h:form id="dataform" rendered="#{IndexController.userSession.salvor}">
             <p:dataTable id="products" var="product" value="#{IndexController.ghostNets}" >
                 <p:column headerText="Breitengrad">
-                    <h:outputText value="#{product.latitude}°"/>
+                    <p:link value="#{product.latitude}°" onclick="window.open('#{product.mapsURL}'); return false;" />
                 </p:column>
                 <p:column headerText="Längengrad">
-                    <h:outputText value="#{product.longitude}°" />
+                    <p:link value="#{product.longitude}°" onclick="window.open('#{product.mapsURL}'); return false;" />
                 </p:column>
                 <p:column headerText="Gemeldete Person">
                     <h:outputText value="#{product.detector.eMail}" />
                 </p:column>
                 <p:column headerText="Bergende Person">
                     <p:link value="#{product.salvor.eMail}" outcome="UserDetails">
-                        <f:param name="netID" value="#{product.salvor.id}"/>
+                        <f:param name="userID" value="#{product.salvor.id}"/>
                     </p:link>
                 </p:column>
                 <p:column headerText="Status">

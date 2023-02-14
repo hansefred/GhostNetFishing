@@ -18,12 +18,12 @@ public class CreateNetRequest {
         this.detector = detector;
     }
 
-    @DecimalMin(value ="0.0")
-    @DecimalMax( value = "90.0")
+    @DecimalMin(value ="-180.0")
+    @DecimalMax( value = "180.0")
     private double latitude;
 
-    @DecimalMin(value ="0.0")
-    @DecimalMax( value = "90.0")
+    @DecimalMin(value ="-180.0")
+    @DecimalMax( value = "180.0")
     private double longitude;
 
     @Min(0)

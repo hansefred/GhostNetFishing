@@ -20,6 +20,6 @@ public class LogoutController {
     {
         userSession.setCurrentUser(null);
 
-        return "Index.xhtml";
+        return "Index.xhtml?faces-redirect=true";
     }
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
   Created by IntelliJ IDEA.
-  User: hanse
+  User: Mark Linder
   Date: 08.02.2023
   Time: 22:44
 -->
@@ -30,10 +30,10 @@
         <p:password required="true" id="pwd" value="#{LoginController.loginRequest.password}"/>
         <p:message id="error_pwd" for="pwd"  />
         </p:panel>
-        <p:panel>
-            <h:messages id="messages" styleClass="ui-message-error" />
-        </p:panel>
+         <h:messages id="messages" styleClass="ui-message-error" />
+
         <p:commandButton value="Submit" action="#{LoginController.Login()}" update="login_form"/>
+        <p:commandButton styleClass="ui-button-secondary" value="Zurück" action="Index" />
     </h:form>
 </h:body>
 </html>

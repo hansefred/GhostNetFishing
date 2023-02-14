@@ -61,7 +61,7 @@ public class LoginController implements Serializable {
         }
 
 
-        User foundUser = new User();
+        User foundUser = null;
         boolean userFound = false;
         for (User u : App.getApp().getUserDAO().GetAll()) {
             if (u.geteMail().equals(loginRequest.geteMail())) {
@@ -84,9 +84,9 @@ public class LoginController implements Serializable {
             return null;
         }
 
-        userSession.setCurrentUser(foundUser);
+        userSession.setCurrentUser((User)foundUser);
 
-        return "Index.xhtml";
+        return "Index.xhtml?faces-redirect=true";
     }
 
 

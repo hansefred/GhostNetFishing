@@ -7,9 +7,11 @@ import com.ghostnetfishing.Bean.DB.GhostNetDAO;
 import com.ghostnetfishing.Bean.DB.GhostNetState;
 import com.ghostnetfishing.Bean.DB.UserDAO;
 import com.ghostnetfishing.Bean.DB.UserObj.Salvor;
+import com.ghostnetfishing.Bean.DB.UserObj.User;
 
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
+import javax.enterprise.inject.spi.CDI;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
@@ -25,14 +27,8 @@ import java.util.List;
 public class IndexController implements Serializable {
 
 
+    public IndexController() {
 
-    public IndexController ()
-    {
-    }
-
-    @Inject
-    public IndexController(UserSession userSession) {
-        this.userSession = userSession;
         ghostNets = App.getApp().getGhostNetDAO().GetAll();
 
     }
@@ -45,7 +41,7 @@ public class IndexController implements Serializable {
     private GhostNet selectedNet;
 
 
-
+    @Inject
     private UserSession userSession;
 
 
@@ -89,6 +85,12 @@ public class IndexController implements Serializable {
         net.setState(GhostNetState.MISSING);
         ghostNetDAO.UpdateNet(net);
 
+    }
+
+    public String NavigateUserDetails ()
+    {
+        User u = userSession.getCurrentUser();
+        return("UserDetails?faces-redirect=true&userID=" + u.getId());
     }
 
 
